@@ -18,12 +18,10 @@ try {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         
         if ($user) {
-            // Nếu tồn tại user, thiết lập session
             $_SESSION['username'] = $username;
             header("Location: dashboard.php");
             exit();
         } else {
-            // Xử lý khi đăng nhập thất bại
             echo "Sai tên đăng nhập hoặc mật khẩu.";
         }
     }
