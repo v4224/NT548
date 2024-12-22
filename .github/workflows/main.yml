@@ -7,16 +7,13 @@ on:
 
 jobs:
   build:
-    runs-on: [self-hosted, web-runner]
-
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-
       - uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-
       - name: Build and Push Image
         run: |
           docker build -t web .
@@ -25,15 +22,15 @@ jobs:
           docker push hoangvu42/web:latest
 
   deploy:
-    name: Deploy Application
     needs: build
-    runs-on: [self-hosted, web-runner]
+    runs-on: self-hosted
     steps:
       - name: Remove Existing Containers
-        run: docker-compose downs
+        run: docker-compose down
       - name: Pull Docker Images
         run: docker pull hoangvu42/web:latest
       - name: Image scan
         run: trivy image hoangvu42/web:latest > trivy_scan_image_report.txt
       - name: Deploy with Docker Compose
         run: docker-compose up -d
+
