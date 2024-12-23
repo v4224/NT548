@@ -40,6 +40,42 @@ resource "aws_security_group" "ec2_sg" {
     ipv6_cidr_blocks = []
   }
 
+  ingress {
+    description      = "Node Exporter"
+    from_port        = 9100
+    to_port          = 9100
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = []
+  }
+
+  ingress {
+    description      = "Prometheus"
+    from_port        = 9090
+    to_port          = 9090
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = []
+  }
+
+   ingress {
+    description      = "Grafana"
+    from_port        = 3000
+    to_port          = 3000
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = []
+  }
+
+  ingress {
+    description      = "Mysql"
+    from_port        = 3306
+    to_port          = 3306
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = []
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
