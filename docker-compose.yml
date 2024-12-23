@@ -29,7 +29,7 @@ services:
       - mysql
 
   grafana:
-    image: hoangvu42/grafana
+    image: grafana/grafana:11.2.0
     ports:
       - "3000:3000"
     container_name: grafana
@@ -39,7 +39,7 @@ services:
       - ./monitor/grafana.ini:/etc/grafana/grafana.ini
 
   prometheus:
-    image: hoangvu42/prometheus
+    image: prom/prometheus:v2.48.0
     ports:
       - "9090:9090"
     volumes:
@@ -47,7 +47,7 @@ services:
       - ./monitor/prometheus.yml:/etc/prometheus/prometheus.yml
 
   exporter:
-    image: hoangvu42/node-exporter
+    image: prom/node-exporter:latest
     container_name: exporter
     ports:
       - "9100:9100"
